@@ -1,21 +1,16 @@
+#!/usr/bin/env python3
+
 import response as R
+
 import utils as Keys
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 print("Bot Started")
-welcome_text ="اهلاً بكم جميعاً 👋🏼♥️\n"\
-    "\n\n🤖في بوت مشاريع العملات الرقمية🤖"\
-    "\nمن خلال هذا البوت :"\
-    "\nتستطيع معرفة مشاريع العملات الرقمية 📝"\
-    "\n\nفقط كل ما عليك تضع اختصار العملة 📍"\
-    "\nتنوية ⚠️"\
-    "\n ليست جميع العملات موجودة هنا 🗃"\
-    "\n\nلكن اسعى لإضافة الكثير منها 🗳"\
-    "\nأعداد أخوكم : عبدالله بن جنيّح"\
-    "\nTwitter : @AMJ_BTC"
+welcome_text = "اهلاً بكم جميعاً 👋🏼♥️\n\n🤖في بوت مشاريع العملات الرقمية🤖\nمن خلال هذا البوت :\nتستطيع معرفة مشاريع العملات الرقمية 📝\n\nفقط كل ما عليك تضع اختصار العملة 📍\nتنوية ⚠️\n ليست جميع العملات موجودة هنا 🗃\n\nلكن اسعى لإضافة الكثير منها 🗳\nأعداد أخوكم : عبدالله بن جنيّح\nTwitter : @AMJ_BTC"
+
 
 def startCommand(update, context):
-    update.message.reply_text("")
+    update.message.reply_text(welcome_text)
 
 
 def helpCommand(update, context):
@@ -23,8 +18,11 @@ def helpCommand(update, context):
 
 
 def handelMessage(update, context):
+    user = update.message.from_user
+    print('You talk with user {} and his user ID: {} '.format(user['username'], user['id']))
+
     text = str(update.message.text).upper()
-    response = R.inputText(text)
+    response = R.inputText(text, user['id'])
     update.message.reply_text(response)
 
 
